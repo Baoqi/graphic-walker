@@ -97,14 +97,14 @@ const App = observer<IGWProps>(function App(props) {
     // use as an embeding module, use outside datasource from props.
     useEffect(() => {
         if (safeDataset.safeData.length > 0 && safeDataset.safeMetas.length > 0) {
+            if (retrieveVizStore){
+                retrieveVizStore(vizStore);
+            }
             commonStore.addAndUseDS({
                 name: 'context dataset',
                 dataSource: safeDataset.safeData,
                 rawFields: safeDataset.safeMetas,
             });
-            if (retrieveVizStore){
-                retrieveVizStore(vizStore);
-            }
         }
     }, [safeDataset]);
 
