@@ -20,6 +20,7 @@ import { useCurrentMediaTheme } from './utils/media';
 import CodeExport from './components/codeExport';
 import VisualConfig from './components/visualConfig';
 import type { ToolbarItemProps } from './components/toolbar';
+import {VizSpecStore} from "./store/visualSpecStore";
 
 export interface IGWProps {
     dataSource?: IRow[];
@@ -41,6 +42,8 @@ export interface IGWProps {
         extra?: ToolbarItemProps[];
         exclude?: string[];
     };
+    showChartOnly?: boolean;
+    retrieveVizStore?: (vizStore: VizSpecStore) => void;
 }
 
 const App = observer<IGWProps>(function App(props) {
@@ -55,6 +58,8 @@ const App = observer<IGWProps>(function App(props) {
         themeKey = 'vega',
         dark = 'media',
         toolbar,
+        showChartOnly,
+        retrieveVizStore,
     } = props;
     const { commonStore, vizStore } = useGlobalStore();
 
@@ -97,6 +102,9 @@ const App = observer<IGWProps>(function App(props) {
                 dataSource: safeDataset.safeData,
                 rawFields: safeDataset.safeMetas,
             });
+            if (retrieveVizStore){
+                retrieveVizStore(vizStore);
+            }
         }
     }, [safeDataset]);
 
@@ -109,6 +117,16 @@ const App = observer<IGWProps>(function App(props) {
     const darkMode = useCurrentMediaTheme(dark);
 
     const rendererRef = useRef<IReactVegaHandler>(null);
+
+    if (showChartOnly) {
+        if (datasets.length > 0) {
+            return (
+                <ReactiveRenderer ref={rendererRef} themeKey={themeKey} dark={dark} />
+            );
+        } else {
+            return (<div></div>);
+        }
+    }
 
     return (
         <div

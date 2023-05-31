@@ -11,6 +11,9 @@ import "./empty_sheet.css";
 import tailwindStyle from "tailwindcss/tailwind.css?inline";
 import style from "./index.css?inline";
 
+import { inferSemanticType, inferAnalyticTypeFromSemanticType } from "./lib/inferMeta";
+export { inferSemanticType, inferAnalyticTypeFromSemanticType };
+
 export const ShadowDomContext = createContext<{ root: ShadowRoot | null }>({ root: null });
 
 export const GraphicWalker: React.FC<IGWProps> = observer((props) => {

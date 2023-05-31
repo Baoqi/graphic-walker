@@ -46,7 +46,7 @@ export function isNumericArray(data: any[]): boolean {
     });
 }
 
-function inferAnalyticTypeFromSemanticType(semanticType: ISemanticType): IAnalyticType {
+export function inferAnalyticTypeFromSemanticType(semanticType: ISemanticType): IAnalyticType {
     switch (semanticType) {
         case 'quantitative':
             return 'measure';

@@ -647,11 +647,20 @@ export class VizSpecStore {
                 );
             }
             if ((spec.facets?.length ?? 0) > 0) {
-                const facets = (spec.facets || []).concat(spec.highFacets || []);
+                const facets = (spec.facets || []);
                 for (let facet of facets) {
                     this.appendField(
                         "rows",
                         fields.find((f) => f.fid === facet)
+                    );
+                }
+            }
+            if ((spec.highFacets?.length ?? 0) > 0) {
+                const highFacets = (spec.highFacets || []);
+                for (let highFacet of highFacets) {
+                    this.appendField(
+                        "columns",
+                        fields.find((f) => f.fid === highFacet)
                     );
                 }
             }
