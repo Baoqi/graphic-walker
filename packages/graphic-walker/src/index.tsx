@@ -14,6 +14,15 @@ import style from "./index.css?inline";
 import { inferSemanticType, inferAnalyticTypeFromSemanticType } from "./lib/inferMeta";
 export { inferSemanticType, inferAnalyticTypeFromSemanticType };
 
+import ReactVega from './vis/react-vega';
+export { ReactVega };
+
+import { transformData } from './workers/transform';
+export { transformData };
+
+import { queryView } from './lib/viewQuery';
+export { queryView };
+
 export const ShadowDomContext = createContext<{ root: ShadowRoot | null }>({ root: null });
 
 export const GraphicWalker: React.FC<IGWProps> = observer((props) => {
